@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/"]
+
+[project]
+name = "PCA"
+version = "0.0.1"
+authors = [
+    {name="Julien Karadayi", email="email@myemail.com"}
+]
+description = "Python code for tutorial on PCA and Test Driven Development."
+readme = "README.rst"
+requires-python = ">=3.6"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "numpy",
+    "pytest",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/jukaradayi/tutoTDD_PCA"
+"Bug Tracker" = "https://github.com/jukaradayi/tutoTDD_PCA/issues"
