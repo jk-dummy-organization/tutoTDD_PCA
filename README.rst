@@ -1,7 +1,7 @@
 PCA
 ---
 
-* Compute a PCA on data stored as CSV.
+* Compute a PCA on data stored as CSV. Also has unit tests.
 
 Installation
 ------------
@@ -12,3 +12,6 @@ Usage
 -----
 
 * python PCA.py
+
+* to launch unit tests :
+    pytest tests/unit_tests.py
