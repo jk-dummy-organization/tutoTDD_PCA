@@ -7,7 +7,6 @@ import numpy as np
 
 def read_csv_data(data_path):
     """ Read input data stored as csv
-
         Parameters
         ----------
         data_path : str
@@ -24,8 +23,6 @@ def read_csv_data(data_path):
         FileNotFoundError
             wrong data_path
     """
-    if not os.path.isfile(data_path):
-        raise FileNotFoundError(f"{data_path} does not exist or is not a file")
 
 
 def substract_mean(mat):
@@ -116,11 +113,6 @@ def sort_values(e_vals, e_vecs):
 
 def apply_transform():
     """Apply transformation to input data
-    """
-
-def whitening():
-    """ Make variance 1 along 
-        
     """
 
 def main():
