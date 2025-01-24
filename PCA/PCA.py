@@ -3,6 +3,7 @@
 
 import os
 import ipdb
+import argparse
 import numpy as np
 
 
@@ -36,6 +37,19 @@ def read_csv_data(data_path):
     if not os.path.isfile(data_path):
         raise FileNotFoundError(f'{data_path} file does not exist')
 
+    # read csv input
+    with open(data_path, 'r') as fin:
+        mat = []
+        for line_idx, line in enumerate(fin.readlines()):
+            # skip header
+            if line_idx == 0:
+                continue
+            row = line.strip().split(',')
+
+            # store data as float
+            mat.append([float(val) for val in row])
+
+    return np.array(mat)
 
 def substract_mean(mat):
     """Compute the mean over all the samples and substract it from the data
@@ -144,9 +158,10 @@ def sort_values(e_vals, e_vecs):
     return index
 
 
-def apply_transform():
+def apply_transform(mat, e_vecs):
     """Apply transformation to input data"""
-
+    # TODO : add number of components required 
+    return np.matmul(mat, e_vecs)
 def write_output():
     """Write transformed data"""
 
@@ -158,16 +173,25 @@ def main():
     """Load input matrix or generate a random one,
     compute its covariance matrix, then compute its eigenvectors using numpy svd
     """
-    #from sklearn.decomposition import PCA
+    parser = argparse.ArgumentParser(description='PCA')
 
-    mat = generate_data(100, 1000)
+    # input arguments
+    parser.add_argument('-f', '--csv', type=str, 
+            help='path to the input csv file')
 
+    args = parser.parse_args()
+
+
+    # read dataset 
+    mat = read_csv_data(args.csv)
+
+    # compute covariance matrix, its eigen vectors
     centered_data = substract_mean(mat)
-
     cov_mat = get_covariance_matrix(centered_data)
     e_val, e_vec = eigenvectors(cov_mat)
+
+    # perform PCA
+    projected_data = apply_transform(mat, e_vec)
     ipdb.set_trace()
-
-
 if __name__ == "__main__":
     main()
