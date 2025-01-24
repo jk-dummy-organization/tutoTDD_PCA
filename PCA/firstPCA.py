@@ -23,6 +23,8 @@ def read_csv_data(data_path):
         FileNotFoundError
             wrong data_path
     """
+    if not os.path.isfile(data_path):
+        raise FileNotFoundError(f'{data_path} file does not exist')
 
 
 def substract_mean(mat):
